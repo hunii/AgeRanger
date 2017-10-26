@@ -1,0 +1,60 @@
+﻿@model AgeRanger.ViewModels.ProfileModifyViewModel
+@{
+    ViewBag.Title = "Home";
+}
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <h1>Modify Profile</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Modify", "Home", FormMethod.Post))
+        {
+            <div class="row form-group">
+                <label class="col-md-6">Id</label>
+                <div class="col-md-6">
+                    @Html.DisplayFor(m => m.Id, new {@class = "form-control", type = "text" })
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="col-md-6">First Name</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-md-6">Last Name</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-md-6">Age</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", type = "text" })
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-offset-6 col-md-6">
+                    <button type="submit" class="btn btn-primary">Modify</button>
+                    <a href="~/Home/Index">Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+    {
+        <div class="col-md-6">
+            @Html.Hidden("id", Model.Id, new { @class = "form-control hidden", type = "text" })
+            <button type="submit" class="btn btn-danger">Delete this Record</button>
+        </div>
+    }
+</div>

@@ -1,0 +1,86 @@
+﻿@model AgeRanger.ViewModels.ProfileListViewModel
+@{
+    ViewBag.Title = "Home";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1>Add Profile</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Home", FormMethod.Post))
+        {
+            <div class="row form-group">
+                <label class="col-md-6">First Name</label>
+                <div class="col-md-6">
+                    @Html.TextBox("FirstName", null, new { @placeholder = "First Name", @class = "form-control", type = "text" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-md-6">Last Name</label>
+                <div class="col-md-6">
+                    @Html.TextBox("LastName", null, new { @placeholder = "Last Name", @class = "form-control", type = "text" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-md-6">Age</label>
+                <div class="col-md-6">
+                    @Html.TextBox("Age", null, new { @placeholder = "Age", @class = "form-control", type = "text" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-6 col-md-6">
+                    <button type="submit" class="btn btn-primary">Add New Profile</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h1>Show All Profile</h1>
+        <div class="search">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.TextBox("search", null, new { @placeholder="Search by Name"})
+                        <button type="submit" class="btn btn-primary">Search Profile</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <p>Found @Model.Count records.</p>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <table class="table table-striped table-responsive">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Age Group</th>
+                <th>Setting</th>
+            </tr>
+            @{
+                foreach (var profile in Model.Profiles)
+                {
+                    <tr>
+                        <td>@profile.FirstName</td>
+                        <td>@profile.LastName</td>
+                        <td>@profile.Age</td>
+                        <td>@profile.Description</td>
+                        <td>
+                            <a href="~/Home/Modify/@profile.Id" class="btn btn-success">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
